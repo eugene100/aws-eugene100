@@ -1,0 +1,13 @@
+# Compiled files
+*.tfstate
+*.backup
+
+# Module directory
+.terraform/
+
+#vscode
+.vscode
+
+# Secrets
+id_rsa
+terraform.tfvars
