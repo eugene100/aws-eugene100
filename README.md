@@ -1,12 +1,17 @@
 # Eugene100 on AWS
 
-The main zpne is **us-east-1**
+Link on the GitHub page: https://github.com/eugene100/aws-eugene100 
+<img align="right" width="100" height="100" src="qr_link.png">
+
+The main zone is **us-east-1**
+
+Tune up AWS account and [AWS CLI](https://docs.aws.amazon.com/cli/latest/userguide/cli-chap-install.html)
 
 ## Terraform
 
 All objects with tag `managed=terraform` covered by terraform code.
 
-tf-state file located in **eugene100-terraform-tfstate** s3 bucket
+**tf-state** file located in **eugene100-terraform-tfstate** s3 bucket, create it.
 
 ## KOPS
 
@@ -44,6 +49,12 @@ kubectl create clusterrolebinding tiller \
   --serviceaccount=kube-system:tiller
 
 helm init --service-account tiller
+```
+
+## Ingress
+
+```
+helm install --name ingress -f values.yaml .
 ```
 
 ## Dashboard

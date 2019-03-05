@@ -1,6 +1,5 @@
-resource "aws_s3_bucket" "eugene100-terraform-tfstate" {
-    bucket = "eugene100-terraform-tfstate"
-    acl    = "private"
+data "aws_s3_bucket" "eugene100-terraform-tfstate" {
+  bucket = "eugene100-terraform-tfstate"
 }
 
 resource "aws_s3_bucket" "k8s-state-store" {
