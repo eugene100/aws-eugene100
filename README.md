@@ -1,7 +1,9 @@
 # Eugene100 on AWS
 
-Link on the GitHub page: https://github.com/eugene100/aws-eugene100 
+Link on the GitHub page: https://github.com/eugene100/aws-eugene100
 <img align="right" width="100" height="100" src="qr_link.png">
+
+Presentation with useful links: [PDF](), [Keynote](https://www.icloud.com/keynote/0L7cA9sSdX8j3S2rgzu8oWolw#AWS_-_Kubernetes_-_Application)
 
 The main zone is **us-east-1**
 
