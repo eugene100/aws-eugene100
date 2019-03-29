@@ -5,7 +5,7 @@ controller:
   name: controller
   image:
     repository: quay.io/kubernetes-ingress-controller/nginx-ingress-controller
-    tag: "0.22.0"
+    tag: "0.23.0"
     pullPolicy: IfNotPresent
     # www-data -> uid 33
     runAsUser: 33
@@ -161,7 +161,7 @@ controller:
 
   service:
     annotations:
-      domainName: "aws.eugene100.org.ua"
+      domainName: "*.aws.eugene100.org.ua"
       service.beta.kubernetes.io/aws-load-balancer-ssl-cert: 	arn:aws:acm:us-east-1:898344057637:certificate/24c0f6f3-2bb6-435f-acb4-733ed2201002
       service.beta.kubernetes.io/aws-load-balancer-backend-protocol: "http"
       service.beta.kubernetes.io/aws-load-balancer-ssl-ports: "https"
@@ -190,7 +190,7 @@ controller:
 
     targetPorts:
       http: http
-      https: https
+      https: http
 
     type: LoadBalancer
 

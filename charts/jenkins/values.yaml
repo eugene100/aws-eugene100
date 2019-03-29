@@ -34,11 +34,9 @@ Master:
   # you should revert Master.AdminUser to your preferred admin user:
   AdminUser: admin
   # AdminPassword: <defaults to random>
-  OwnSshKey: false
-  # If CasC auto-reload is enabled, an SSH (RSA) keypair is needed.  Can either provide your own, or leave unconfigured\false to allow a random key to be auto-generated.
-  # If you choose to use your own, you must upload your decrypted RSA private key (not the public key above) to a Kubernetes secret using the following command:
-  # kubectl -n <namespace> create secret generic <helm_release_name> --dry-run --from-file=jenkins-admin-private-key=~/.ssh/id_rsa -o yaml |kubectl -n <namespace> apply -f -
-  # Replace ~/.ssh/id_rsa in the above command with the path to your private key file and the <helm_release_name> and <namespace> placeholders to suit.
+  # AdminSshKey: <defaults to auto-generated>
+  # If CasC auto-reload is enabled, an SSH (RSA) keypair is needed.  Can either provide your own, or leave unconfigured to allow a random key to be auto-generated.
+  # If you supply your own, it is recommended that the values file that contains your key not be committed to source control in an unencrypted format
   RollingUpdate: {}
   # Ignored if Persistence is enabled
   # maxSurge: 1
@@ -72,7 +70,7 @@ Master:
   ServicePort: 8080
   # For minikube, set this to NodePort, elsewhere use LoadBalancer
   # Use ClusterIP if your setup includes ingress controller
-  ServiceType: ClusterIP
+  ServiceType: LoadBalancer
   # Master Service annotations
   ServiceAnnotations: {}
   # Master Custom Labels
@@ -86,6 +84,7 @@ Master:
   PodLabels: {}
   # Used to create Ingress record (should used with ServiceType: ClusterIP)
   HostName: jenkins.aws.eugene100.org.ua
+  hostName: jenkins.aws.eugene100.org.ua
   # NodePort: <to set explicitly, choose port between 30000-32767
   # Enable Kubernetes Liveness and Readiness Probes
   # ~ 2 minutes to allow Jenkins to restart when upgrading plugins. Set ReadinessTimeout to be shorter than LivenessTimeout.
@@ -144,7 +143,6 @@ Master:
     - workflow-aggregator:2.6
     - credentials-binding:1.17
     - git:3.9.1
-    - github-branch-source:2.4.2
 
   # Enable to always override the installed plugins with the values of 'Master.InstallPlugins' on upgrade or redeployment.
   # OverwritePlugins: true
@@ -191,7 +189,7 @@ Master:
       # If enabled: true, Jenkins Configuration as Code will be reloaded on-the-fly without a reboot.  If false or not-specified,
       # jcasc changes will cause a reboot and will only be applied at the subsequent start-up.  Auto-reload uses the Jenkins CLI
       # over SSH to reapply config when changes to the ConfigScripts are detected.  The admin user (or account you specify in
-      # Master.AdminUser) will have a random SSH private key (RSA 4096) assigned unless you specify OwnSshKey: true.  This will be saved to a k8s secret.
+      # Master.AdminUser) will have a random SSH private key (RSA 4096) assigned unless you specify AdminSshKey.  This will be saved to a k8s secret.
       enabled: false
       image: shadwell/k8s-sidecar:0.0.2
       imagePullPolicy: IfNotPresent
@@ -247,6 +245,7 @@ Master:
   # By default, the configMap is only used to set the initial config the first time
   # that the chart is installed.  Setting `OverwriteConfig` to `true` will overwrite
   # the jenkins config with the contents of the configMap every time the pod starts.
+  # This will also overwrite all init scripts
   OverwriteConfig: false
 
   ingress:
@@ -258,10 +257,10 @@ Master:
     # kubernetes.io/tls-acme: "true"
     # Set this path to JenkinsUriPrefix above or use annotations to rewrite path
     # path: "/jenkins"
-    tls:
+    # tls:
     # - secretName: jenkins.cluster.local
-    hosts:
-      - jenkins.aws.eugene100.org.ua
+    # hosts:
+    #   - jenkins.aws.eugene100.org.ua
   AdditionalConfig: {}
 
   # Master.HostAliases allows for adding entries to Pod /etc/hosts:

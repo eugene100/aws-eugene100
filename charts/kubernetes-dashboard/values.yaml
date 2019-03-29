@@ -30,7 +30,7 @@ enableInsecureLogin: true
 extraArgs:
   - --enable-skip-login
   - --enable-insecure-login
-  - --system-banner="Welcome to Kubernetes"
+  # - --system-banner="Welcome to Kubernetes"
 
 # Annotations to be added to kubernetes dashboard pods
 podAnnotations: {}
@@ -97,7 +97,7 @@ ingress:
   ## If you use ingress-nginx < 0.21.0
   #   nginx.ingress.kubernetes.io/secure-backends: "true"
   ## if you use ingress-nginx >= 0.21.0
-  #   nginx.ingress.kubernetes.io/backend-protocol: "HTTPS"
+    # nginx.ingress.kubernetes.io/backend-protocol: "HTTPS"
 
 
   ## Kubernetes Dashboard Ingress paths
@@ -115,10 +115,10 @@ ingress:
   ## Kubernetes Dashboard Ingress TLS configuration
   ## Secrets must be manually created in the namespace
   ##
-  tls:
-    - secretName: kubernetes-dashboard-tls
-      hosts:
-        - kubernetes-dashboard.domain.com
+  # tls:
+  #   - secretName: kubernetes-dashboard-tls
+  #     hosts:
+  #       - dashboard.aws.eugene100.org.ua
 
 rbac:
   # Specifies whether RBAC resources should be created
