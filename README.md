@@ -51,6 +51,14 @@ Waiting while the cluster is risen up:
 $ kops validate cluster ${NAME}
 ```
 
+Add more nodes to the cluster
+
+```bash
+$ kops edit ig nodes
+$ kops update cluster aws.eugene100.org.ua --yes
+```
+
+
 
 ## Helm
 
@@ -132,6 +140,32 @@ $ printf $(kubectl get secret --namespace default jenkins -o jsonpath="{.data.je
 ```
 
 Jenkins slaves for Kubernetes already setup. You can create job and make a build.
+
+> Note: If your slave doesn't want to start check the slave pod:
+>
+> ```bash
+> $ kubectl get pods
+> NAME                                                     READY   STATUS    RESTARTS   AGE
+> dashboard-kubernetes-dashboard-78d9b9f5fc-kw5zt          1/1     Running   0          8h
+> default-lq5d5                                            0/1     Pending   0          5m
+> ingress-nginx-ingress-controller-6844d9ddb-gqmvk         1/1     Running   0          8h
+> ingress-nginx-ingress-default-backend-677b99f864-8js22   1/1     Running   0          8h
+> jenkins-58d5c7f5fd-fvv5v                                 1/1     Running   0          9m
+> $ kubectl describe po default-lq5d5
+> Name:               default-lq5d5
+> Namespace:          default
+> Priority:           0
+> PriorityClassName:  <none>
+> Node:               <none>
+> ...
+> Events:
+>   Type     Reason            Age                 From               Message
+>   ----     ------            ----                ----               -------
+>   Warning  FailedScheduling  9s (x8 over 5m34s)  default-scheduler  0/2 nodes are available: 1 Insufficient cpu, 1 node(s) had taints that the pod didn't tolerate.
+> ```
+>
+> So, we should add a node or increase existant.
+>
 
 
 
