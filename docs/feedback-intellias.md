@@ -8,7 +8,7 @@ The second day completely focused on Kubernetes. Guys were prepared very well at
 
 The third day was about Kubernetes stability, application debug and high availability. We setup Jenkins as an example of application and then tried to do dirty things with it.
 
-During all workshop, participants participated in discussions, generated many questions and stumbled on critical situations. Unfortunately, the presentation wasn't so perfect but in a result, we obtained more experience in debugging and a base of discussions.
+During all workshop, we participated in discussions, generated many questions and stumbled on critical situations. In a result, we obtained more experience in debugging and a base of discussions.
 
 I think it was a great start for IT specialists in Kubernetes platform.
 
