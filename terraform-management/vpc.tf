@@ -4,7 +4,7 @@ resource "aws_vpc" "vpc-default" {
     enable_dns_support   = true
     instance_tenancy     = "default"
 
-    tags {
+    tags = {
       Name = "default"
       managed = "terraform"
       environment = "management"
@@ -18,7 +18,7 @@ resource "aws_subnet" "subnet-default-1a" {
     availability_zone       = "${var.region}a"
     map_public_ip_on_launch = true
 
-    tags {
+    tags = {
       managed = "terraform"
       environment = "management"
     }
@@ -29,7 +29,7 @@ resource "aws_subnet" "subnet-default-1b" {
     availability_zone       = "${var.region}b"
     map_public_ip_on_launch = true
 
-    tags {
+    tags = {
       managed = "terraform"
       environment = "management"
     }
@@ -40,7 +40,7 @@ resource "aws_subnet" "subnet-default-1c" {
     availability_zone       = "${var.region}c"
     map_public_ip_on_launch = true
 
-    tags {
+    tags = {
       managed = "terraform"
       environment = "management"
     }
@@ -51,7 +51,7 @@ resource "aws_subnet" "subnet-default-1d" {
     availability_zone       = "${var.region}d"
     map_public_ip_on_launch = true
 
-    tags {
+    tags = {
       managed = "terraform"
       environment = "management"
     }
@@ -62,7 +62,7 @@ resource "aws_subnet" "subnet-default-1e" {
     availability_zone       = "${var.region}e"
     map_public_ip_on_launch = true
 
-    tags {
+    tags = {
       managed = "terraform"
       environment = "management"
     }
@@ -73,7 +73,7 @@ resource "aws_subnet" "subnet-default-1f" {
     availability_zone       = "${var.region}f"
     map_public_ip_on_launch = true
 
-    tags {
+    tags = {
       managed = "terraform"
       environment = "management"
     }
